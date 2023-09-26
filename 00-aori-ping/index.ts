@@ -1,4 +1,4 @@
-import { XYK } from "@aori-io/sdk";
+import { AoriProvider } from "@aori-io/sdk";
 import "dotenv/config";
 import { AnkrProvider, Wallet } from "ethers";
 import { WebSocket } from "ws";
@@ -9,12 +9,12 @@ const wallet = new Wallet(process.env.BOT_PRIVATE_KEY || "0x00000000000000000000
 const provider = new AnkrProvider(process.env.CHAIN || "goerli", process.env.ANKR_API_KEY);
 
 ws.on("open", async () => {
-    const xyk = new XYK(
+    const bot = new AoriProvider(
         ws,
         subscriptions,
         wallet,
         provider
     );
 
-    await xyk.ping();
+    await bot.ping();
 });
