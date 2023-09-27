@@ -8,6 +8,7 @@ export class OneForOneBot extends LimitOrderManager {
     chainId: number = 5;
 
     async initialise({ chainId, aTokenAddress, bTokenAddress }: { chainId: number, aTokenAddress: string, bTokenAddress: string }): Promise<void> {
+        console.log("Initialised bot");
         super.initialise();
 
         this.chainId = chainId;
@@ -23,7 +24,7 @@ export class OneForOneBot extends LimitOrderManager {
             await order.settleOrders(parameters, Signature.from(signature));
         });
 
-        this.refreshOrder();
+        await this.refreshOrder();
     }
 
     async refreshOrder(): Promise<void> {
@@ -35,6 +36,7 @@ export class OneForOneBot extends LimitOrderManager {
             chainId: this.chainId
         });
 
+        console.log("Creating new order...");
         await this.makeOrder({ order: limitOrder, chainId: this.chainId });
     }
 }
