@@ -20,7 +20,7 @@ ws.on("open", async () => {
         aTokenAddress: process.env.A_TOKEN_ADDRESS || "",
         bTokenAddress: process.env.B_TOKEN_ADDRESS || "",
         aAmount: 10n ** 18n,
-        bAmount: 10n ** 18n,
+        bAmount: 2n * 10n ** 18n,
         chainId: 5
     });
 });
