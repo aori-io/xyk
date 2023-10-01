@@ -2,8 +2,5 @@
   "dependencies": {
     "@aori-io/sdk": "^0.1.4",
     "dotenv": "^16.3.1"
-  },
-  "devDependencies": {
-    "@types/ws": "^8.5.6"
   }
 }
