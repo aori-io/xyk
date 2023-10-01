@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { AnkrProvider, Wallet } from "ethers";
-import { ConstantRateMarketMaker } from "./CRMM";
+import { ConstantRateMarketMaker } from "./CrMM";
 
 const wallet = new Wallet(process.env.BOT_PRIVATE_KEY || "0x0000000000000000000000000000000000000000000000000000000000000000")
 const provider = new AnkrProvider(process.env.CHAIN || "goerli", process.env.ANKR_API_KEY);
