@@ -1,7 +1,6 @@
-import { defaultOrderAddress, LimitOrderManager, OrderToExecute, Order__factory, ResponseEvents } from "@aori-io/sdk";
-import { Signature } from "ethers";
+import { FromInventoryExecutor, SubscriptionEvents } from "@aori-io/sdk";
 
-export class ConstantMarketMaker extends LimitOrderManager {
+export class ConstantMarketMaker extends FromInventoryExecutor {
 
     aTokenAddress: string = "";
     bTokenAddress: string = "";
@@ -19,26 +18,16 @@ export class ConstantMarketMaker extends LimitOrderManager {
         super.initialise();
         console.log("Initialised bot");
 
-        this.chainId = chainId;
-        this.aTokenAddress = aTokenAddress;
-        this.bTokenAddress = bTokenAddress;
-
-        this.on(ResponseEvents.SubscriptionEvents.OrderTaken, async (orderHash) => {
-            await this.refreshOrder();
-        });
-
-        this.on(ResponseEvents.NotificationEvents.OrderToExecute, async ({ parameters, signature }: OrderToExecute) => {
-            const order = Order__factory.connect(defaultOrderAddress, this.provider);
-            await order.settleOrders(parameters, Signature.from(signature));
-        });
-
         this.defaultOrder = {
-            inputToken: this.aTokenAddress,
-            outputToken: this.bTokenAddress,
+            inputToken: aTokenAddress,
+            outputToken: bTokenAddress,
             inputAmount: aAmount,
             outputAmount: bAmount,
-            chainId: this.chainId
+            chainId
         }
+
+        this.on(SubscriptionEvents.OrderTaken, async (orderHash) => await this.refreshOrder());
+        await this.refreshOrder();
     }
 
     async refreshOrder(): Promise<void> {
@@ -46,7 +35,7 @@ export class ConstantMarketMaker extends LimitOrderManager {
 
         this.makeOrder({
             order: await this.createLimitOrder(this.defaultOrder),
-            chainId: this.chainId
+            chainId: this.defaultOrder.chainId
         });
     }
 }

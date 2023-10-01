@@ -1,7 +1,6 @@
-import { defaultOrderAddress, LimitOrderManager, OrderToExecute, Order__factory, ResponseEvents } from "@aori-io/sdk";
-import { Signature } from "ethers";
+import { FromInventoryExecutor, SubscriptionEvents } from "@aori-io/sdk";
 
-export class OneForOneBot extends LimitOrderManager {
+export class OneForOneBot extends FromInventoryExecutor {
 
     aTokenAddress: string = "";
     bTokenAddress: string = "";
@@ -15,15 +14,7 @@ export class OneForOneBot extends LimitOrderManager {
         this.aTokenAddress = aTokenAddress;
         this.bTokenAddress = bTokenAddress;
 
-        this.on(ResponseEvents.SubscriptionEvents.OrderTaken, async (orderHash) => {
-            await this.refreshOrder();
-        });
-
-        this.on(ResponseEvents.NotificationEvents.OrderToExecute, async ({ parameters, signature }: OrderToExecute) => {
-            const order = Order__factory.connect(defaultOrderAddress, this.provider);
-            await order.settleOrders(parameters, Signature.from(signature));
-        });
-
+        this.on(SubscriptionEvents.OrderTaken, async (orderHash) => await this.refreshOrder());
         await this.refreshOrder();
     }
 

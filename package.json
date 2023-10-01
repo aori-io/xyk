@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@aori-io/sdk": "^0.1.4",
+    "@aori-io/sdk": "^0.1.6",
     "dotenv": "^16.3.1"
   }
 }
