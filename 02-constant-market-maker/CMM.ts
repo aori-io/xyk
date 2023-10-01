@@ -2,10 +2,6 @@ import { FromInventoryExecutor, SubscriptionEvents } from "@aori-io/sdk";
 
 export class ConstantMarketMaker extends FromInventoryExecutor {
 
-    aTokenAddress: string = "";
-    bTokenAddress: string = "";
-    chainId: number = 5;
-
     defaultOrder: {
         inputToken: string,
         outputToken: string,

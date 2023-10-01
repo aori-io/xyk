@@ -1,10 +1,6 @@
 import { FromInventoryExecutor } from "@aori-io/sdk";
 
 export class ConstantRateMarketMaker extends FromInventoryExecutor {
-    aTokenAddress: string = "";
-    bTokenAddress: string = "";
-    chainId: number = 5;
-
     defaultOrder: {
         inputToken: string,
         outputToken: string,
