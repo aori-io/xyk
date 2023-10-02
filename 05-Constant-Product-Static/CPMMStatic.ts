@@ -12,7 +12,6 @@ export class CPMMStatic extends FromInventoryExecutor {
     sqrtK!: number;
     numberOfOrders!: number;
     K!: bigint;
-    numberK!: number;
     range!: number;
 
     async initialise({ chainId, aTokenAddress, bTokenAddress, t_min, t_max }: { chainId: number, aTokenAddress: string, bTokenAddress: string, aAmount: bigint, bAmount: bigint, t_min: bigint, t_max: bigint }): Promise<void> {
@@ -26,17 +25,16 @@ export class CPMMStatic extends FromInventoryExecutor {
         const bAmount: bigint = await tokenB.balanceOf(this.wallet.address);
 
         this.K = aAmount * bAmount;
-        this.numberK = Number(this.K);
-        this.sqrtK = Math.sqrt(this.numberK);
+        this.sqrtK = Math.sqrt(Number(this.K));
         this.range = Number(t_max-t_min);
-        this.numberOfOrders = this.range/this.sqrtK; // needs rounding
+        this.numberOfOrders = Math.floor(this.range/this.sqrtK);
 
 
         this.defaultOrder = {
             inputToken: aTokenAddress,
             outputToken: bTokenAddress,
             inputAmount: aAmount,
-            outputAmount: bAmount,
+            outputAmount: t_min,
             chainId
         };
     };
@@ -45,7 +43,7 @@ export class CPMMStatic extends FromInventoryExecutor {
         if (!this.defaultOrder) return;
     
         let currentOutputAmount = Number(this.defaultOrder.outputAmount);
-        const incrementAmount = this.sqrtK;
+        const incrementAmount = this.range/this.sqrtK;
     
         for (let i = 1; i <= Math.round(this.numberOfOrders); i++) {
             currentOutputAmount += incrementAmount;
