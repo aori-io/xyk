@@ -45,7 +45,7 @@ export class CPMMStatic extends FromInventoryExecutor {
         let currentOutputAmount = Number(this.defaultOrder.outputAmount);
         const incrementAmount = this.range/this.sqrtK;
     
-        for (let i = 1; i <= Math.round(this.numberOfOrders); i++) {
+        for (let i = 1; i <= this.numberOfOrders; i++) {
             currentOutputAmount += incrementAmount;
     
             this.makeOrder({
