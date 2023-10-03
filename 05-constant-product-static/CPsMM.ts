@@ -1,6 +1,6 @@
 import { ERC20__factory, FromInventoryExecutor } from "@aori-io/sdk";
 
-export class CPMMStatic extends FromInventoryExecutor {
+export class ConstantProductStaticMarketMaker extends FromInventoryExecutor {
     defaultOrder: {
         inputToken: string,
         outputToken: string,
@@ -9,12 +9,13 @@ export class CPMMStatic extends FromInventoryExecutor {
         chainId: number
     } = undefined as any;
 
-    sqrtK!: number;
+    t_min: bigint = 0n;
+    t_max: bigint = 0n;
+    sqrtK: bigint = 0n;
     numberOfOrders!: number;
-    K!: bigint;
-    range!: number;
+    samplingFactor!: bigint;
 
-    async initialise({ chainId, aTokenAddress, bTokenAddress, t_min, t_max }: { chainId: number, aTokenAddress: string, bTokenAddress: string, aAmount: bigint, bAmount: bigint, t_min: bigint, t_max: bigint }): Promise<void> {
+    async initialise({ chainId, aTokenAddress, bTokenAddress, t_min, t_max, samplingFactor }: { chainId: number, aTokenAddress: string, bTokenAddress: string, t_min: bigint, t_max: bigint, samplingFactor: bigint }): Promise<void> {
         super.initialise();
         console.log("Initialised bot");
 
@@ -24,11 +25,11 @@ export class CPMMStatic extends FromInventoryExecutor {
         const aAmount: bigint = await tokenA.balanceOf(this.wallet.address);
         const bAmount: bigint = await tokenB.balanceOf(this.wallet.address);
 
-        this.K = aAmount * bAmount;
-        this.sqrtK = Math.sqrt(Number(this.K));
-        this.range = Number(t_max-t_min);
-        this.numberOfOrders = Math.floor(this.range/this.sqrtK);
-
+        this.t_min = t_min;
+        this.t_max = t_max;
+        this.sqrtK = BigInt(Math.sqrt(Number(aAmount * bAmount)));
+        this.numberOfOrders = Number((this.t_max - t_min) * this.samplingFactor / this.sqrtK);
+        this.samplingFactor = samplingFactor;
 
         this.defaultOrder = {
             inputToken: aTokenAddress,
@@ -41,18 +42,19 @@ export class CPMMStatic extends FromInventoryExecutor {
 
     async refreshOrder(): Promise<void> {
         if (!this.defaultOrder) return;
-    
-        let currentOutputAmount = Number(this.defaultOrder.outputAmount);
-        const incrementAmount = this.range/this.sqrtK;
-    
+        if (this.samplingFactor == 0n) this.samplingFactor = 1n;
+
+        let currentOutputAmount = this.t_min;
+        const incrementAmount = (this.t_max - this.t_min) / this.sqrtK / this.samplingFactor;
+
         for (let i = 1; i <= this.numberOfOrders; i++) {
             currentOutputAmount += incrementAmount;
-    
+
             this.makeOrder({
                 order: await this.createLimitOrder({
                     ...this.defaultOrder,
-                    inputAmount: this.defaultOrder.inputAmount,
-                    outputAmount: BigInt(currentOutputAmount)
+                    inputAmount: this.sqrtK / this.samplingFactor,
+                    outputAmount: currentOutputAmount
                 }),
                 chainId: this.defaultOrder.chainId
             });
