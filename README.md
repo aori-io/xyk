@@ -10,6 +10,7 @@
 - [05: Constant Product Static Market Maker](#05-constant-product-static-market-maker)
 - [06: Binomial Static Market Maker](#06-binomial-static-market-maker)
 - [07: Log Market Scoring Rule](#07-log-market-scoring-rule)
+- [08: Balancer Static Market Maker](#08-balancer-static-market-maker)
 
 
 ### Introduction
@@ -25,7 +26,7 @@ Bots will have several attributes about them that either dictate the behaviour o
 - Their limit order placement (`rate` or just upon initialisation)
 - Their limit order replacement (`static` if none, `dynamic` if recurring)
 - Their limit order settlement (from their own inventory or by pulling in liquidity from an outside DEX)
-- The relation between their limit orders (e.g CFMM curve, LMSR, Balancer Weighted Curve etc.)
+- The relation between their limit orders (e.g constant, some CFMM curve, LMSR, Balancer Weighted Curve etc.)
 
 ### 00: Test Connectivity
 _Added by [@hilliamt](https://github.com/hilliamt)_
@@ -133,6 +134,15 @@ _Added by `@50shadesofgwei`_
 
 ```bash
 $ ts-node 07-log-market-scoring-rule
+```
+
+TODO:
+
+### 08: Balancer Static Market Maker
+_Added by `@50shadesofgwei`_
+
+```bash
+$ ts-node 08-balancer-static-market-maker
 ```
 
 TODO:

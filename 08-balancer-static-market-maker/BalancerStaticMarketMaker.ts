@@ -1,6 +1,6 @@
 import { ERC20__factory, FromInventoryExecutor } from "@aori-io/sdk";
 
-export class CPMMStatic extends FromInventoryExecutor {
+export class BalancerStaticMarketMaker extends FromInventoryExecutor {
     defaultOrder: {
         inputToken: string,
         outputToken: string,
@@ -41,25 +41,6 @@ export class CPMMStatic extends FromInventoryExecutor {
     async refreshOrder(): Promise<void> {
         if (!this.defaultOrder) return;
 
-        let currentOutputAmount = Number(this.defaultOrder.outputAmount);
-        const incrementAmount = this.range / this.numberOfOrders;
-
-        for (let i = 1; i <= this.numberOfOrders; i++) {
-            // Shifted square root function to fit exponential curve
-            const sqrtAdjustment = 1 - Math.sqrt(currentOutputAmount / this.range);
-
-            const adjustedOutputAmount = currentOutputAmount * sqrtAdjustment;
-
-            this.makeOrder({
-                order: await this.createLimitOrder({
-                    ...this.defaultOrder,
-                    inputAmount: this.defaultOrder.inputAmount,
-                    outputAmount: BigInt(Math.round(adjustedOutputAmount))
-                }),
-                chainId: this.defaultOrder.chainId
-            });
-
-            currentOutputAmount += incrementAmount;
-        }
+        // TODO: fix logic using L(t_i) formula for Balancer here: https://www.paradigm.xyz/2021/06/uniswap-v3-the-universal-amm#simulating-other-curves
     }
 };

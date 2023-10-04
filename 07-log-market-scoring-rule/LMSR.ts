@@ -1,6 +1,6 @@
 import { ERC20__factory, FromInventoryExecutor } from "@aori-io/sdk";
 
-export class CPMMStatic extends FromInventoryExecutor {
+export class LogMarketScoringRule extends FromInventoryExecutor {
     defaultOrder: {
         inputToken: string,
         outputToken: string,
