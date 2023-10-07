@@ -109,11 +109,18 @@ _Added by [@hilliamt](https://github.com/hilliamt)_
 $ ts-node 04-ascending-static-market-maker
 ```
 
-This bot can be ran to emulate a simple concentrated liquidity
-curve; it takes address and amount for input + output, then creates a series of sequential
-orders that increment (or decrement) according to the value of percentageMultiplier.
-If the first order was a 1:1 swap, an example continuation may also submit orders for 1:1.05 and 1:1.1
-as well.
+This bot can be ran to emulate a simple concentrated liquidity curve; it takes address and amount for input + output, then creates a series of sequential orders that increment (or decrement) according to the value of percentageMultiplier. If the first order was a 1:1 swap, an example continuation may also submit orders for 1:1.05 and 1:1.1 as well.
+
+```
+On Initialisation:
+- Create a limit order (aTokenAddress, aAmount, bTokenAddress, bAmount, chainId)
+- Create a limit order (aTokenAddress, aAmount, bTokenAddress, bAmount * percentageMultiplier, chainId)
+- Create a limit order (aTokenAddress, aAmount, bTokenAddress, bAmount * 2 * percentageMultiplier, chainId)
+- ...
+
+On Order-To-Be-Executed:
+- Settles order on-chain
+```
 
 ### 05: Constant Product Static Market Maker
 _Added by [@50shadesofgwei](https://github.com/50shadesofgwei)_
