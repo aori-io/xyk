@@ -132,7 +132,7 @@ $ ts-node 05-constant-product-static
 TODO:
 
 ### 06: Binomial Static Market Maker
-_Added by `@50shadesofgwei`_ and `@hilliamt`_
+_Added by [@50shadesofgwei](https://github.com/50shadesofgwei) and [@hilliamt](https://github.com/hilliamt)_
 
 ```bash
 $ ts-node 06-binomial-static-market-maker
@@ -141,7 +141,7 @@ $ ts-node 06-binomial-static-market-maker
 TODO:
 
 ### 07: Log Market Scoring Rule
-_Added by `@50shadesofgwei`_
+_Added by [@50shadesofgwei](https://github.com/50shadesofgwei)_
 
 ```bash
 $ ts-node 07-log-market-scoring-rule
@@ -150,7 +150,7 @@ $ ts-node 07-log-market-scoring-rule
 TODO:
 
 ### 08: Balancer Static Market Maker
-_Added by `@50shadesofgwei`_
+_Added by [@50shadesofgwei](https://github.com/50shadesofgwei)_
 
 ```bash
 $ ts-node 08-balancer-static-market-maker
