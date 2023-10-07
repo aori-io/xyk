@@ -123,13 +123,13 @@ On Order-To-Be-Executed:
 ```
 
 ### 05: Constant Product Static Market Maker
-_Added by [@50shadesofgwei](https://github.com/50shadesofgwei)_
+_Added by [@50shadesofgwei](https://github.com/50shadesofgwei) and [@hilliamt](https://github.com/hilliamt)_
 
 ```bash
 $ ts-node 05-constant-product-static
 ```
 
-TODO:
+This bot creates the distribution of limit orders that emulate a constant product market maker. More details of the derivation of this can be found within Dan Robinson's paper [Uniswap v3: The Universal AMM](https://www.paradigm.xyz/2021/06/uniswap-v3-the-universal-amm).
 
 ### 06: Binomial Static Market Maker
 _Added by [@50shadesofgwei](https://github.com/50shadesofgwei) and [@hilliamt](https://github.com/hilliamt)_
@@ -138,7 +138,7 @@ _Added by [@50shadesofgwei](https://github.com/50shadesofgwei) and [@hilliamt](h
 $ ts-node 06-binomial-static-market-maker
 ```
 
-TODO:
+This bot creates a binomial distribution of limit orders around some midpoint. The dropoff is determined by the `dropOffPercentage` in which limit orders will drop off the multiple of `dropOffPercentage` each time e.g a limit order at price `P`, `P * dropOffPercentage`, `P * (dropOffPercentage ** 2)` etc.
 
 ### 07: Log Market Scoring Rule
 _Added by [@50shadesofgwei](https://github.com/50shadesofgwei)_
