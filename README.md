@@ -147,7 +147,7 @@ _Added by [@50shadesofgwei](https://github.com/50shadesofgwei)_
 $ ts-node 07-log-market-scoring-rule
 ```
 
-TODO:
+This bot creates a market maker that uses logarithmic market scoring rule to price assets. This is done via using the equivalent "liquidity at price" function described in Dan Robinson's paper [Uniswap v3: The Universal AMM](https://www.paradigm.xyz/2021/06/uniswap-v3-the-universal-amm).
 
 ### 08: Balancer Static Market Maker
 _Added by [@50shadesofgwei](https://github.com/50shadesofgwei)_
@@ -156,4 +156,4 @@ _Added by [@50shadesofgwei](https://github.com/50shadesofgwei)_
 $ ts-node 08-balancer-static-market-maker
 ```
 
-TODO:
+This bot creates a market maker that uses the Balancer Weighted Curve to price assets. The equivalent "liquidity at price" function is described in Dan Robinson's paper [Uniswap v3: The Universal AMM](https://www.paradigm.xyz/2021/06/uniswap-v3-the-universal-amm).
