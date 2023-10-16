@@ -1,5 +1,7 @@
 # xyk: cfmm-replicating bots on Aori
 
+![.](assets/aori-xyk.svg)
+
 ## Table of Contents
 - [Introduction](#introduction)
 - [00: Test Connectivity](#00-test-connectivity)
