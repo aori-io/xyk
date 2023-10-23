@@ -131,7 +131,13 @@ _Added by [@50shadesofgwei](https://github.com/50shadesofgwei) and [@hilliamt](h
 $ ts-node 05-constant-product-static
 ```
 
-This bot creates the distribution of limit orders that emulate a constant product market maker. More details of the derivation of this can be found within Dan Robinson's paper [Uniswap v3: The Universal AMM](https://www.paradigm.xyz/2021/06/uniswap-v3-the-universal-amm).
+This bot creates the distribution of limit orders that emulate a constant product market maker.
+
+![.](./assets/cpmm.png)
+
+
+More details of the derivation of this can be found within Dan Robinson's paper [Uniswap v3: The Universal AMM](https://www.paradigm.xyz/2021/06/uniswap-v3-the-universal-amm).
+
 
 ### 06: Binomial Static Market Maker
 _Added by [@50shadesofgwei](https://github.com/50shadesofgwei) and [@hilliamt](https://github.com/hilliamt)_
@@ -149,7 +155,11 @@ _Added by [@50shadesofgwei](https://github.com/50shadesofgwei)_
 $ ts-node 07-log-market-scoring-rule
 ```
 
-This bot creates a market maker that uses logarithmic market scoring rule to price assets. This is done via using the equivalent "liquidity at price" function described in Dan Robinson's paper [Uniswap v3: The Universal AMM](https://www.paradigm.xyz/2021/06/uniswap-v3-the-universal-amm).
+This bot creates a market maker that uses logarithmic market scoring rule to price assets.
+
+![.](./assets/lmsr.png)
+
+This is done via using the equivalent "liquidity at price" function described in Dan Robinson's paper [Uniswap v3: The Universal AMM](https://www.paradigm.xyz/2021/06/uniswap-v3-the-universal-amm).
 
 ### 08: Balancer Static Market Maker
 _Added by [@50shadesofgwei](https://github.com/50shadesofgwei)_
@@ -158,4 +168,8 @@ _Added by [@50shadesofgwei](https://github.com/50shadesofgwei)_
 $ ts-node 08-balancer-static-market-maker
 ```
 
-This bot creates a market maker that uses the Balancer Weighted Curve to price assets. The equivalent "liquidity at price" function is described in Dan Robinson's paper [Uniswap v3: The Universal AMM](https://www.paradigm.xyz/2021/06/uniswap-v3-the-universal-amm).
+This bot creates a market maker that uses the Balancer Weighted Curve to price assets.
+
+![.](./assets/balancer.png)
+
+The equivalent "liquidity at price" function is described in Dan Robinson's paper [Uniswap v3: The Universal AMM](https://www.paradigm.xyz/2021/06/uniswap-v3-the-universal-amm).
